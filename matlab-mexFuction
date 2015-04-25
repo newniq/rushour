@@ -9,9 +9,9 @@ double numInt(double a,double b){
 
 	double fa = myfunc(a);
 	double fb = myfunc(b);
-	double fm = myfunc((a+b)/2);
+	double fx = myfunc((a+b)/2);
 
-	return (b-a)*(fa+4*fm+fb)/6;
+	return (b-a)*(fa+4*fx+fb)/6;
 }
 
 double myfunc2(double a,double b){
