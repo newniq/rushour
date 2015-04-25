@@ -1,0 +1,47 @@
+#include <mex.h>
+#include <math.h>
+
+double myfunc(double x){
+	return sin(x)/x;
+}
+
+double numInt(double a,double b){
+
+	double fa = myfunc(a);
+	double fb = myfunc(b);
+	double fm = myfunc((a+b)/2);
+
+	return (b-a)*(fa+4*fm+fb)/6;
+}
+
+double myfunc2(double a,double b){
+
+	double i = a;
+	double h = (b-a)/pow(3,8);
+	double ans = 0;
+
+	for(;i<=b;i+=h){
+		ans += numInt(i,i+h);
+	}
+
+	return ans;
+
+
+}
+
+void mexFunction(int nlhs,mxArray *plhs[], int nrhs,const mxArray *prhs[]){
+
+	double *x;
+
+	double a,b;
+
+	plhs[0]=mxCreateDoubleMatrix(1,1,mxREAL);
+	x = mxGetPr(plhs[0]);
+	a = *(mxGetPr(prhs[0]));
+	b = *(mxGetPr(prhs[1]));
+
+
+	*x = myfunc2(a,b);
+
+
+}
